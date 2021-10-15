@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     // Valido se meu body (armazenado em pokemonApiResult) é diferente de null
                     pokemonApiResult?.let {
                         // Recebo o resultado da API e exibo em um Toast (uma espécie de caixinha de alerta para o Android)
-                        Toast.makeText(this@MainActivity, it.count.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Pokemons carregados com sucesso.", Toast.LENGTH_SHORT).show()
 
                         tvResultado.text = ""
 
