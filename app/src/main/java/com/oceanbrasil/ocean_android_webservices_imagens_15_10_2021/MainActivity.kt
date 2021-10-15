@@ -2,6 +2,7 @@ package com.oceanbrasil.ocean_android_webservices_imagens_15_10_2021
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         val call = service.listarPokemon()
 
+        val tvResultado = findViewById<TextView>(R.id.tvResultado)
+
         call.enqueue(object : Callback<PokemonApiResult> {
             override fun onResponse(
                 call: Call<PokemonApiResult>,
@@ -37,6 +40,12 @@ class MainActivity : AppCompatActivity() {
                     pokemonApiResult?.let {
                         // Recebo o resultado da API e exibo em um Toast (uma espécie de caixinha de alerta para o Android)
                         Toast.makeText(this@MainActivity, it.count.toString(), Toast.LENGTH_SHORT).show()
+
+                        tvResultado.text = ""
+
+                        it.results.forEach { pokemon ->
+                            tvResultado.append(pokemon.name + "\n")
+                        }
                     }
                 }
             }
