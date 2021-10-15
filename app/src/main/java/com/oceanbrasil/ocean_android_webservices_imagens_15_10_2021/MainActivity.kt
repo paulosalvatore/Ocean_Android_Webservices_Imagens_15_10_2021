@@ -7,6 +7,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://pokeapi.co/api/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val service: PokemonService = retrofit.create(PokemonService::class.java)
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<PokemonApiResult>, t: Throwable) {
-
+                Toast.makeText(this@MainActivity, "Falha na requisição", Toast.LENGTH_SHORT).show()
             }
         })
     }
